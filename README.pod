@@ -1,0 +1,37 @@
+=pod
+
+=head1 NAME
+
+Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM does it
+
+=head1 VERSION
+
+version 0.01
+
+=head1 DESCRIPTION
+
+This is a L<Dist::Zilla> PluginBundle. It is roughly equivalent to the
+following dist.ini:
+
+=head1 SYNOPSYS
+
+    # in dist.ini
+    [@Author::CHIM]
+    authority = 'cpan:CHIM'
+    github_username = 'Wu-Wu'
+
+=head1 SEE ALSO
+
+L<Dist::Zilla>
+
+=head1 AUTHOR
+
+Anton Gerasimov <chim@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Anton Gerasimov.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
