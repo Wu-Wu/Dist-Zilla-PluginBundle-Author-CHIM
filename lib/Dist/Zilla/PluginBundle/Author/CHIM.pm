@@ -13,7 +13,7 @@ has dist => (
     is       => 'ro',
     isa      => 'Str',
     lazy     => 1,
-    default  => sub { $_[0]->payload->{dist} || $_[0]->name },
+    default  => sub { $_[0]->payload->{dist} },
 );
 
 has authority => (
