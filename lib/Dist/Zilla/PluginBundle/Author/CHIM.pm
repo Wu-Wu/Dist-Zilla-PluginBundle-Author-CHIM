@@ -44,7 +44,6 @@ has github_repopath => (
     default  => sub { join '/' => 'github.com', $_[0]->github_username, $_[0]->github_reponame },
 );
 
-
 sub configure {
     my ($self) = @_;
 
@@ -120,8 +119,6 @@ sub configure {
         [ 'Manifest'                => {} ],
 
     );
-
-
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -134,17 +131,109 @@ __END__
 
     # in dist.ini
     [@Author::CHIM]
-    authority = 'cpan:CHIM'
-    github_username = 'Wu-Wu'
+    dist            = My-Very-Cool-Module
+    authority       = cpan:CHIM
+    github_username = Wu-Wu
+    github_reponame = perl5-My-Very-Cool-Module
 
 =head1 DESCRIPTION
 
 This is a L<Dist::Zilla> PluginBundle. It is roughly equivalent to the
 following dist.ini:
 
+    [GatherDir]
+    [PruneCruft]
+
+    ;; modified files
+    [OurPkgVersion]
+    [PodWeaver]
+    [Authority]
+    authority      = %{authority}
+    do_metadata    = 1
+    locate_comment = 1
+
+    ;; generated files
+    [License]
+    [ReadmeFromPod]
+    [ReadmeAnyFromPod]
+    [ReadmeAnyFromPod / ReadmePodInRoot]
+    type     = pod
+    filename = README.pod
+    location = root
+
+    [MetaNoIndex]
+    directory = t
+    directory = xt
+    directory = eg
+    directory = examples
+    directory = corpus
+    package   = DB
+    namespace = t::lib
+
+    ;; set META resources
+    [MetaResources]
+    homepage        = https://metacpan.org/release/%{dist}
+    repository.url  = git://%{github_repopath}.git
+    repository.web  = https://%{github_repopath}
+    bugtracker.web  = https://%{github_repopath}/issues
+    repository.type = git
+
+    ;; add 'provides' to META
+    [MetaProvides::Package]
+    meta_noindex = 1
+
+    ;; META files
+    [MetaYAML]
+    [MetaJSON]
+
+    ;; t tests
+    [Test::Compile]
+    fake_home = 1
+
+    ;; xt tests
+    [ExtraTests]
+    [MetaTests]
+    [PodSyntaxTests]
+    [PodCoverageTests]
+    [Test::Version]
+    [Test::Kwalitee]
+
+    ;; build
+    [MakeMaker]
+    [Manifest]
+
+=head1 ATTRIBUTES
+
+=head2 dist
+
+The name of the distribution. Required.
+
+=head2 authority
+
+This one is used to set name the CPAN author of the distibution. It should be something like C<cpan:PAUSEID>.
+Default value is I<cpan:CHIM>.
+
+=head2 github_username
+
+Indicates github.com's account name. Default value is I<Wu-Wu>.
+
+=head2 github_reponame
+
+Indicates github.com's repository name. Default value is set to value of the I<dist>-attribute name.
+
+=head1 METHODS
+
+=head2 configure
+
+Bundle's configuration for role L<Dist::Zilla::Role::PluginBundle::Easy>.
+
 =head1 SEE ALSO
 
 L<Dist::Zilla>
+
+L<Dist::Zilla::Role::PluginBundle::Easy>
+
+L<Dist::Zilla::Plugin::Authority>
 
 =cut
 
