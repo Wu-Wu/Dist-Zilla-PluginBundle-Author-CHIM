@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 DESCRIPTION
 

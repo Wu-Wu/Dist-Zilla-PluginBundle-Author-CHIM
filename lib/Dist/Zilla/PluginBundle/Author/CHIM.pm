@@ -4,6 +4,8 @@ package Dist::Zilla::PluginBundle::Author::CHIM;
 # AUTHORITY
 # VERSION
 
+use strict;
+use warnings;
 use Moose;
 
 use Dist::Zilla 4.3;
