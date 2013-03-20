@@ -1,0 +1,13 @@
+language: perl
+
+perl:
+    - "5.16"
+    - "5.14"
+    - "5.12"
+    - "5.10"
+
+install:
+    - "dzil authordeps | xargs cpanm -q -n && dzil listdeps | xargs cpanm -q -n"
+
+script:
+    - "dzil test --release -I lib"

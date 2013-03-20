@@ -56,6 +56,11 @@ sub configure {
         # modified files
         [ 'OurPkgVersion'           => {} ],
         [ 'PodWeaver'               => {} ],
+        [ 'NextRelease'             => {
+                'time_zone' => 'UTC',
+                'format'    => '%-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d'
+            }
+        ],
         [ 'Authority'               => {
                 'authority'      => $self->authority,
                 'do_metadata'    => 1,
@@ -120,6 +125,10 @@ sub configure {
         [ 'MakeMaker'               => {} ],
         [ 'Manifest'                => {} ],
 
+        # release
+        [ 'ConfirmRelease'          => {} ],
+        [ 'UploadToCPAN'            => {} ],
+
     );
 }
 
@@ -149,6 +158,9 @@ following dist.ini:
     ;; modified files
     [OurPkgVersion]
     [PodWeaver]
+    [NextRelease]
+    time_zone = UTC
+    format    = %-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d
     [Authority]
     authority      = %{authority}
     do_metadata    = 1
@@ -203,6 +215,10 @@ following dist.ini:
     ;; build
     [MakeMaker]
     [Manifest]
+
+    ;; release
+    [ConfirmRelease]
+    [UploadToCPAN]
 
 =head1 ATTRIBUTES
 

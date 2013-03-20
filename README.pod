@@ -19,6 +19,9 @@ following dist.ini:
     ;; modified files
     [OurPkgVersion]
     [PodWeaver]
+    [NextRelease]
+    time_zone = UTC
+    format    = %-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d
     [Authority]
     authority      = %{authority}
     do_metadata    = 1
@@ -73,6 +76,10 @@ following dist.ini:
     ;; build
     [MakeMaker]
     [Manifest]
+
+    ;; release
+    [ConfirmRelease]
+    [UploadToCPAN]
 
 =head1 SYNOPSYS
 
