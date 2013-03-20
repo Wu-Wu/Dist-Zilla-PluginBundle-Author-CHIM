@@ -1,6 +1,8 @@
 Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
 
 {{$NEXT}}
+
+0.02    Wed Mar 20 15:56:30 2013 +0000
     - updated prerequisites
     - added plugins NextRelease, ConfirmRelease, UploadToCPAN
     - added .travis.yml
