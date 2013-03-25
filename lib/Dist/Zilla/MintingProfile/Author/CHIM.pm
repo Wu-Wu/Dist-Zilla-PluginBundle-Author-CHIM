@@ -24,11 +24,11 @@ __END__
 
     % dzil new -P Author::CHIM Pretty::Cool::Module
 
-=head2 DESCRIPTION
+=head1 DESCRIPTION
 
 This installs a Dist::Zilla minting profile used by CHIM.
 
-=head2 SEE ALSO
+=head1 SEE ALSO
 
 L<Dist::Zilla>
 
