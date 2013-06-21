@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 DESCRIPTION
 
@@ -108,6 +108,10 @@ Indicates github.com's account name. Default value is I<Wu-Wu>.
 =head2 github_reponame
 
 Indicates github.com's repository name. Default value is set to value of the I<dist>-attribute name.
+
+=head2 fake_release
+
+Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is I<0>.
 
 =head1 METHODS
 

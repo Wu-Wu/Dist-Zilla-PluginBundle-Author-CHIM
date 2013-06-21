@@ -46,6 +46,13 @@ has github_repopath => (
     default  => sub { join '/' => 'github.com', $_[0]->github_username, $_[0]->github_reponame },
 );
 
+has fake_release => (
+    is       => 'ro',
+    isa      => 'Bool',
+    lazy     => 1,
+    default  => sub { $_[0]->payload->{fake_release} || 0 },
+);
+
 sub configure {
     my ($self) = @_;
 
@@ -127,7 +134,7 @@ sub configure {
 
         # release
         [ 'ConfirmRelease'          => {} ],
-        [ 'UploadToCPAN'            => {} ],
+        [ ($self->fake_release ? 'FakeRelease' : 'UploadToCPAN') => {} ],
 
     );
 }
@@ -238,6 +245,10 @@ Indicates github.com's account name. Default value is I<Wu-Wu>.
 =head2 github_reponame
 
 Indicates github.com's repository name. Default value is set to value of the I<dist>-attribute name.
+
+=head2 fake_release
+
+Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is I<0>.
 
 =head1 METHODS
 
