@@ -70,6 +70,8 @@ following dist.ini:
     [PodCoverageTests]
     [Test::Version]
     [Test::Kwalitee]
+    [Test::EOL]
+    [Test::NoTabs]
 
     ;; build
     [MakeMaker]

@@ -127,6 +127,8 @@ sub configure {
         [ 'PodCoverageTests'        => {} ],
         [ 'Test::Version'           => {} ],
         [ 'Test::Kwalitee'          => {} ],
+        [ 'Test::EOL'               => {} ],
+        [ 'Test::NoTabs'            => {} ],
 
         # build
         [ 'MakeMaker'               => {} ],
@@ -218,6 +220,8 @@ following dist.ini:
     [PodCoverageTests]
     [Test::Version]
     [Test::Kwalitee]
+    [Test::EOL]
+    [Test::NoTabs]
 
     ;; build
     [MakeMaker]
