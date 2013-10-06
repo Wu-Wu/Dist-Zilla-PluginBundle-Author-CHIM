@@ -5,6 +5,8 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
     [ FEATURES ]
     - added plugin FakeRelease
     - more files to exclude via .gitignore
+    - added a few versions of the perl to the .tavis.yml
+    - in root directory README.pod replaced by README.md
 
     [ META ]
     - minimum perl version set to 5.8.9

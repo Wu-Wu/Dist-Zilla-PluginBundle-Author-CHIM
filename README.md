@@ -1,16 +1,14 @@
-=pod
-
-=head1 NAME
+# NAME
 
 Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM does it
 
-=head1 VERSION
+# VERSION
 
 version 0.04
 
-=head1 DESCRIPTION
+# DESCRIPTION
 
-This is a L<Dist::Zilla> PluginBundle. It is roughly equivalent to the
+This is a [Dist::Zilla](http://search.cpan.org/perldoc?Dist::Zilla) PluginBundle. It is roughly equivalent to the
 following dist.ini:
 
     [GatherDir]
@@ -31,9 +29,9 @@ following dist.ini:
     [License]
     [ReadmeFromPod]
     [ReadmeAnyFromPod]
-    [ReadmeAnyFromPod / ReadmePodInRoot]
-    type     = pod
-    filename = README.pod
+    [ReadmeAnyFromPod / ReadmeMdInRoot]
+    type     = markdown
+    filename = README.md
     location = root
 
     [MetaNoIndex]
@@ -81,7 +79,7 @@ following dist.ini:
     [ConfirmRelease]
     [UploadToCPAN]
 
-=head1 SYNOPSYS
+# SYNOPSYS
 
     # in dist.ini
     [@Author::CHIM]
@@ -90,51 +88,50 @@ following dist.ini:
     github_username = Wu-Wu
     github_reponame = perl5-My-Very-Cool-Module
 
-=head1 ATTRIBUTES
+# ATTRIBUTES
 
-=head2 dist
+## dist
 
 The name of the distribution. Required.
 
-=head2 authority
+## authority
 
-This one is used to set name the CPAN author of the distibution. It should be something like C<cpan:PAUSEID>.
-Default value is I<cpan:CHIM>.
+This one is used to set name the CPAN author of the distibution. It should be something like `cpan:PAUSEID`.
+Default value is _cpan:CHIM_.
 
-=head2 github_username
+## github\_username
 
-Indicates github.com's account name. Default value is I<Wu-Wu>.
+Indicates github.com's account name. Default value is _Wu-Wu_.
 
-=head2 github_reponame
+## github\_reponame
 
-Indicates github.com's repository name. Default value is set to value of the I<dist>-attribute name.
+Indicates github.com's repository name. Default value is set to value of the _dist_\-attribute name.
 
-=head2 fake_release
+## fake\_release
 
-Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is I<0>.
+Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is _0_.
 
-=head1 METHODS
+# METHODS
 
-=head2 configure
+## configure
 
-Bundle's configuration for role L<Dist::Zilla::Role::PluginBundle::Easy>.
+Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](http://search.cpan.org/perldoc?Dist::Zilla::Role::PluginBundle::Easy).
 
-=head1 SEE ALSO
+# SEE ALSO
 
-L<Dist::Zilla>
+[Dist::Zilla](http://search.cpan.org/perldoc?Dist::Zilla)
 
-L<Dist::Zilla::Role::PluginBundle::Easy>
+[Dist::Zilla::Role::PluginBundle::Easy](http://search.cpan.org/perldoc?Dist::Zilla::Role::PluginBundle::Easy)
 
-L<Dist::Zilla::Plugin::Authority>
+[Dist::Zilla::Plugin::Authority](http://search.cpan.org/perldoc?Dist::Zilla::Plugin::Authority)
 
-=head1 AUTHOR
+# AUTHOR
 
 Anton Gerasimov <chim@cpan.org>
 
-=head1 COPYRIGHT AND LICENSE
+# COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2013 by Anton Gerasimov.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-

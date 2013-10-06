@@ -80,9 +80,9 @@ sub configure {
         [ 'ReadmeFromPod'           => {} ],
         [ 'ReadmeAnyFromPod'        => {} ],
         [ 'ReadmeAnyFromPod'        =>
-            'ReadmePodInRoot' => {
-                'type'     => 'pod',
-                'filename' => 'README.pod',
+            'ReadmeMdInRoot' => {
+                'type'     => 'markdown',
+                'filename' => 'README.md',
                 'location' => 'root',
             },
         ],
@@ -177,9 +177,9 @@ following dist.ini:
     [License]
     [ReadmeFromPod]
     [ReadmeAnyFromPod]
-    [ReadmeAnyFromPod / ReadmePodInRoot]
-    type     = pod
-    filename = README.pod
+    [ReadmeAnyFromPod / ReadmeMdInRoot]
+    type     = markdown
+    filename = README.md
     location = root
 
     [MetaNoIndex]
