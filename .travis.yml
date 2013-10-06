@@ -10,7 +10,7 @@ perl:
     - "5.8"
 
 install:
-    - "dzil authordeps | grep -v 'Dist::Zilla::PluginBundle::Author::CHIM' | xargs cpanm -q -n"
+    - "dzil authordeps | fgrep -v 'Dist::Zilla::PluginBundle::Author::CHIM' | xargs cpanm -q -n"
     - "dzil listdeps -I lib | xargs cpanm -q -n"
 
 script:
