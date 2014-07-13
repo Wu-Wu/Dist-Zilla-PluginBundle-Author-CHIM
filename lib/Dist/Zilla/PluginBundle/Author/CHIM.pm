@@ -87,6 +87,13 @@ sub configure {
             },
         ],
 
+        [ 'TravisCI::StatusBadge'   => {
+                'user'      => $self->github_username,
+                'repo'      => $self->github_reponame,
+                'vector'    => 1,
+            },
+        ],
+
         [ 'MetaNoIndex'             => {
                 'directory' => [qw(t xt eg examples corpus)],
                 'package'   => [qw(DB)],
@@ -183,6 +190,11 @@ following dist.ini:
     type     = markdown
     filename = README.md
     location = root
+
+    [TravisCI::StatusBadge]
+    user = %{github_username}
+    repo = %{github_reponame}
+    vector = 1
 
     [MetaNoIndex]
     directory = t
