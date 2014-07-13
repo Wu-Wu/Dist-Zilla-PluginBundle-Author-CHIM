@@ -7,11 +7,11 @@ perl:
     - "5.14"
     - "5.12"
     - "5.10"
-    # - "5.8"
 
 before_install:
     - "cpanm -n -q Dist::Zilla::Plugin::Test::EOL"
     - "cpanm -n -q Dist::Zilla::Plugin::Test::NoTabs"
+    - "cpanm -n -q Dist::Zilla::Plugin::TravisCI::StatusBadge"
 
 install:
     - "dzil authordeps -I lib | xargs cpanm -q -n && dzil listdeps -I lib | xargs cpanm -q -n"

@@ -8,7 +8,7 @@ use strict;
 use warnings;
 use Moose;
 
-use Dist::Zilla 4.3;
+use Dist::Zilla;
 with 'Dist::Zilla::Role::PluginBundle::Easy';
 
 has dist => (
