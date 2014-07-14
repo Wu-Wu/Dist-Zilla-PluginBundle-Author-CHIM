@@ -2,6 +2,8 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
 
 {{$NEXT}}
 
+0.050001 Mon Jul 14 07:15:13 2014 +0000
+
     [ FEATURES ]
     - use v5
     - added TravisCI::StatusBadge plugin
