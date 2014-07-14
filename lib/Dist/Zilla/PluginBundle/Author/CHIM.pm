@@ -381,5 +381,7 @@ L<Dist::Zilla::Plugin::MetaNoIndex>
 
 L<Dist::Zilla::Plugin::NextRelease>
 
+L<Dist::Zilla::Plugin::GatherDir>
+
 =cut
 

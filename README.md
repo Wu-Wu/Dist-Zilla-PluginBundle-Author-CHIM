@@ -198,6 +198,8 @@ Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](https://
 
 [Dist::Zilla::Plugin::NextRelease](https://metacpan.org/pod/Dist::Zilla::Plugin::NextRelease)
 
+[Dist::Zilla::Plugin::GatherDir](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir)
+
 # AUTHOR
 
 Anton Gerasimov <chim@cpan.org>
