@@ -133,7 +133,7 @@ sub configure {
         # set META resources
         [ 'MetaResources'           => {
                 'homepage'        => 'https://metacpan.org/release/' . $self->dist,
-                'repository.url'  => 'git://'   . $self->github_repopath . '.git',
+                'repository.url'  => 'https://' . $self->github_repopath . '.git',
                 'repository.web'  => 'https://' . $self->github_repopath,
                 'bugtracker.web'  => 'https://' . $self->github_repopath . '/issues',
                 'repository.type' => 'git',
