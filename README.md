@@ -2,13 +2,15 @@
 
 Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM does it
 
+[![Build Status](https://travis-ci.org/Wu-Wu/Dist-Zilla-PluginBundle-Author-CHIM.svg?branch=master)](https://travis-ci.org/Wu-Wu/Dist-Zilla-PluginBundle-Author-CHIM)
+
 # VERSION
 
-version 0.04
+version 0.05
 
 # DESCRIPTION
 
-This is a [Dist::Zilla](http://search.cpan.org/perldoc?Dist::Zilla) PluginBundle. It is roughly equivalent to the
+This is a [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) PluginBundle. It is roughly equivalent to the
 following dist.ini:
 
     [GatherDir]
@@ -33,6 +35,11 @@ following dist.ini:
     type     = markdown
     filename = README.md
     location = root
+
+    [TravisCI::StatusBadge]
+    user = %{github_username}
+    repo = %{github_reponame}
+    vector = 1
 
     [MetaNoIndex]
     directory = t
@@ -107,25 +114,65 @@ Indicates github.com's account name. Default value is _Wu-Wu_.
 
 ## github\_reponame
 
-Indicates github.com's repository name. Default value is set to value of the _dist_\-attribute name.
+Indicates github.com's repository name. Default value is set to value of the _dist_-attribute name.
 
 ## fake\_release
 
 Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is _0_.
 
+## MetaNoIndex.directory
+
+Exclude directories (recursively with files) from indexing by PAUSE/CPAN. Default values:
+`t`, `xt`, `eg`, `examples`, `corpus`. Allowed multiple values, e.g.
+
+    MetaNoIndex.directory = foo/bar
+    MetaNoIndex.directory = quux/bar/foo
+
+See more at [Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex).
+
+## MetaNoIndex.namespace
+
+Exclude stuff under the namespace from indexing by PAUSE/CPAN. Default values: `t::lib`. Allowed
+multiple values, e.g.
+
+    MetaNoIndex.namespace = Foo::Bar
+    MetaNoIndex.namespace = Quux::Foo
+
+See more at [Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex).
+
+## MetaNoIndex.package
+
+Exclude the package name from indexing by PAUSE/CPAN. Default values: `DB`. Allowed
+multiple values, e.g.
+
+    MetaNoIndex.package = Foo::Bar
+
+See more at [Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex).
+
+## MetaNoIndex.file
+
+Exclude specific filename from indexing by PAUSE/CPAN. No defaults. Allowed
+multiple values, e.g.
+
+    MetaNoIndex.file = lib/Foo/Bar.pm
+
+See more at [Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex).
+
 # METHODS
 
 ## configure
 
-Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](http://search.cpan.org/perldoc?Dist::Zilla::Role::PluginBundle::Easy).
+Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](https://metacpan.org/pod/Dist::Zilla::Role::PluginBundle::Easy).
 
 # SEE ALSO
 
-[Dist::Zilla](http://search.cpan.org/perldoc?Dist::Zilla)
+[Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
 
-[Dist::Zilla::Role::PluginBundle::Easy](http://search.cpan.org/perldoc?Dist::Zilla::Role::PluginBundle::Easy)
+[Dist::Zilla::Role::PluginBundle::Easy](https://metacpan.org/pod/Dist::Zilla::Role::PluginBundle::Easy)
 
-[Dist::Zilla::Plugin::Authority](http://search.cpan.org/perldoc?Dist::Zilla::Plugin::Authority)
+[Dist::Zilla::Plugin::Authority](https://metacpan.org/pod/Dist::Zilla::Plugin::Authority)
+
+[Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex)
 
 # AUTHOR
 

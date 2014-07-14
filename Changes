@@ -5,6 +5,7 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
     [ FEATURES ]
     - use v5
     - added TravisCI::StatusBadge plugin
+    - added tuning options for MetaNoIndex
 
 0.04    Sun Oct 6 13:20:29 2013 +0000
 
@@ -24,6 +25,7 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
     - added basic minting profile
 
 0.02    Wed Mar 20 15:56:30 2013 +0000
+
     [ META ]
     - updated prerequisites
 

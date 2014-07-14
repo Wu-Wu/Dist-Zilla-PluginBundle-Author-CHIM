@@ -53,8 +53,36 @@ has fake_release => (
     default  => sub { $_[0]->payload->{fake_release} || 0 },
 );
 
+sub mvp_multivalue_args {
+    return qw(
+        MetaNoIndex.directory
+        MetaNoIndex.package
+        MetaNoIndex.namespace
+        MetaNoIndex.file
+    );
+}
+
 sub configure {
     my ($self) = @_;
+
+    my $meta_no_index__options = {
+        directory => [(
+            @{ $self->payload->{'MetaNoIndex.directory'} || [] },
+            qw( t xt eg examples corpus )
+        )],
+        package => [(
+            @{ $self->payload->{'MetaNoIndex.package'} || [] },
+            qw( DB )
+        )],
+        namespace => [(
+            @{ $self->payload->{'MetaNoIndex.namespace'} || [] },
+            qw( t::lib )
+        )],
+        ( $self->payload->{'MetaNoIndex.file'}
+            ? ( file => $self->payload->{'MetaNoIndex.file'} )
+            : ( )
+        ),
+    };
 
     $self->add_plugins(
         [ 'GatherDir'               => {} ],
@@ -94,12 +122,7 @@ sub configure {
             },
         ],
 
-        [ 'MetaNoIndex'             => {
-                'directory' => [qw(t xt eg examples corpus)],
-                'package'   => [qw(DB)],
-                'namespace' => [qw(t::lib)],
-            },
-        ],
+        [ 'MetaNoIndex'             => $meta_no_index__options ],
 
         # set META resources
         [ 'MetaResources'           => {
@@ -266,6 +289,44 @@ Indicates github.com's repository name. Default value is set to value of the I<d
 
 Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is I<0>.
 
+=head2 MetaNoIndex.directory
+
+Exclude directories (recursively with files) from indexing by PAUSE/CPAN. Default values:
+C<t>, C<xt>, C<eg>, C<examples>, C<corpus>. Allowed multiple values, e.g.
+
+    MetaNoIndex.directory = foo/bar
+    MetaNoIndex.directory = quux/bar/foo
+
+See more at L<Dist::Zilla::Plugin::MetaNoIndex>.
+
+=head2 MetaNoIndex.namespace
+
+Exclude stuff under the namespace from indexing by PAUSE/CPAN. Default values: C<t::lib>. Allowed
+multiple values, e.g.
+
+    MetaNoIndex.namespace = Foo::Bar
+    MetaNoIndex.namespace = Quux::Foo
+
+See more at L<Dist::Zilla::Plugin::MetaNoIndex>.
+
+=head2 MetaNoIndex.package
+
+Exclude the package name from indexing by PAUSE/CPAN. Default values: C<DB>. Allowed
+multiple values, e.g.
+
+    MetaNoIndex.package = Foo::Bar
+
+See more at L<Dist::Zilla::Plugin::MetaNoIndex>.
+
+=head2 MetaNoIndex.file
+
+Exclude specific filename from indexing by PAUSE/CPAN. No defaults. Allowed
+multiple values, e.g.
+
+    MetaNoIndex.file = lib/Foo/Bar.pm
+
+See more at L<Dist::Zilla::Plugin::MetaNoIndex>.
+
 =head1 METHODS
 
 =head2 configure
@@ -279,6 +340,8 @@ L<Dist::Zilla>
 L<Dist::Zilla::Role::PluginBundle::Easy>
 
 L<Dist::Zilla::Plugin::Authority>
+
+L<Dist::Zilla::Plugin::MetaNoIndex>
 
 =cut
 
