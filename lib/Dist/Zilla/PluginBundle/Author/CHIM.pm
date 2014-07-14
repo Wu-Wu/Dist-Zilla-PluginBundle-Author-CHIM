@@ -53,6 +53,10 @@ has fake_release => (
     default  => sub { $_[0]->payload->{fake_release} || 0 },
 );
 
+=for Pod::Coverage mvp_multivalue_args
+
+=cut
+
 sub mvp_multivalue_args {
     return qw(
         MetaNoIndex.directory
