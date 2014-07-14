@@ -4,6 +4,7 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
 
     [ FEATURES ]
     - added tuning for NextRelease
+    - added tuning for GatherDir
 
 0.050001 Mon Jul 14 07:15:13 2014 +0000
 

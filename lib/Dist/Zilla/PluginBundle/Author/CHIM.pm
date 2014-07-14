@@ -63,6 +63,7 @@ sub mvp_multivalue_args {
         MetaNoIndex.package
         MetaNoIndex.namespace
         MetaNoIndex.file
+        GatherDir.exclude_match
     );
 }
 
@@ -88,8 +89,15 @@ sub configure {
         ),
     };
 
+    my $gather_dir__options = {
+        ( $self->payload->{'GatherDir.exclude_match'}
+            ? ( 'exclude_match' => $self->payload->{'GatherDir.exclude_match'} )
+            : ( )
+        ),
+    };
+
     $self->add_plugins(
-        [ 'GatherDir'               => {} ],
+        [ 'GatherDir'               => $gather_dir__options ],
         [ 'PruneCruft'              => {} ],
 
         # modified files
@@ -237,7 +245,7 @@ following dist.ini:
     ;; set META resources
     [MetaResources]
     homepage        = https://metacpan.org/release/%{dist}
-    repository.url  = git://%{github_repopath}.git
+    repository.url  = https://%{github_repopath}.git
     repository.web  = https://%{github_repopath}
     bugtracker.web  = https://%{github_repopath}/issues
     repository.type = git
@@ -344,6 +352,16 @@ multiple values, e.g.
     MetaNoIndex.file = lib/Foo/Bar.pm
 
 See more at L<Dist::Zilla::Plugin::MetaNoIndex>.
+
+=head2 GatherDir.exclude_match
+
+Regular expression pattern which causes not to gather matched files. No defaults. Allowed
+multiple values, e.g.
+
+    GatherDir.exclude_match = ^foo.*
+    GatherDir.exclude_match = ^ba(r|z)\/qux.*
+
+See more at L<Dist::Zilla::Plugin::GatherDir>.
 
 =head1 METHODS
 

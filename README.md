@@ -53,7 +53,7 @@ following dist.ini:
     ;; set META resources
     [MetaResources]
     homepage        = https://metacpan.org/release/%{dist}
-    repository.url  = git://%{github_repopath}.git
+    repository.url  = https://%{github_repopath}.git
     repository.web  = https://%{github_repopath}
     bugtracker.web  = https://%{github_repopath}/issues
     repository.type = git
@@ -169,6 +169,16 @@ multiple values, e.g.
     MetaNoIndex.file = lib/Foo/Bar.pm
 
 See more at [Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex).
+
+## GatherDir.exclude\_match
+
+Regular expression pattern which causes not to gather matched files. No defaults. Allowed
+multiple values, e.g.
+
+    GatherDir.exclude_match = ^foo.*
+    GatherDir.exclude_match = ^ba(r|z)\/qux.*
+
+See more at [Dist::Zilla::Plugin::GatherDir](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir).
 
 # METHODS
 
