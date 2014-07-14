@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 # VERSION
 
-version 0.050001
+version 0.050002
 
 # DESCRIPTION
 
@@ -97,7 +97,7 @@ following dist.ini:
     github_username = Wu-Wu
     github_reponame = perl5-My-Very-Cool-Module
 
-# ATTRIBUTES
+# OPTIONS
 
 ## dist
 
@@ -119,6 +119,18 @@ Indicates github.com's repository name. Default value is set to value of the _di
 ## fake\_release
 
 Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is _0_.
+
+## NextRelease.time\_zone
+
+Timezone for entries in **Changes** file. Default value is `UTC`.
+
+See more at [Dist::Zilla::Plugin::NextRelease](https://metacpan.org/pod/Dist::Zilla::Plugin::NextRelease).
+
+## NextRelease.format
+
+Format of entry in _Changes_ file. Default value is `%-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d`.
+
+See more at [Dist::Zilla::Plugin::NextRelease](https://metacpan.org/pod/Dist::Zilla::Plugin::NextRelease).
 
 ## MetaNoIndex.directory
 
@@ -173,6 +185,8 @@ Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](https://
 [Dist::Zilla::Plugin::Authority](https://metacpan.org/pod/Dist::Zilla::Plugin::Authority)
 
 [Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex)
+
+[Dist::Zilla::Plugin::NextRelease](https://metacpan.org/pod/Dist::Zilla::Plugin::NextRelease)
 
 # AUTHOR
 

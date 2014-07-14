@@ -96,8 +96,10 @@ sub configure {
         [ 'OurPkgVersion'           => {} ],
         [ 'PodWeaver'               => {} ],
         [ 'NextRelease'             => {
-                'time_zone' => 'UTC',
-                'format'    => '%-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d'
+                'time_zone' => $self->payload->{'NextRelease.time_zone'} ||
+                                    'UTC',
+                'format'    => $self->payload->{'NextRelease.format'} ||
+                                    '%-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d'
             }
         ],
         [ 'Authority'               => {
@@ -270,7 +272,7 @@ following dist.ini:
     [ConfirmRelease]
     [UploadToCPAN]
 
-=head1 ATTRIBUTES
+=head1 OPTIONS
 
 =head2 dist
 
@@ -292,6 +294,18 @@ Indicates github.com's repository name. Default value is set to value of the I<d
 =head2 fake_release
 
 Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is I<0>.
+
+=head2 NextRelease.time_zone
+
+Timezone for entries in B<Changes> file. Default value is C<UTC>.
+
+See more at L<Dist::Zilla::Plugin::NextRelease>.
+
+=head2 NextRelease.format
+
+Format of entry in I<Changes> file. Default value is C<%-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d>.
+
+See more at L<Dist::Zilla::Plugin::NextRelease>.
 
 =head2 MetaNoIndex.directory
 
@@ -346,6 +360,8 @@ L<Dist::Zilla::Role::PluginBundle::Easy>
 L<Dist::Zilla::Plugin::Authority>
 
 L<Dist::Zilla::Plugin::MetaNoIndex>
+
+L<Dist::Zilla::Plugin::NextRelease>
 
 =cut
 
