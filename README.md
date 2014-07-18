@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 # VERSION
 
-version 0.050003
+version 0.051001
 
 # DESCRIPTION
 

@@ -64,6 +64,7 @@ sub mvp_multivalue_args {
         MetaNoIndex.namespace
         MetaNoIndex.file
         GatherDir.exclude_match
+        GitCheck.allow_dirty
     );
 }
 
