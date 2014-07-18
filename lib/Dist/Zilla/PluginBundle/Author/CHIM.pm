@@ -97,6 +97,12 @@ sub configure {
     };
 
     $self->add_plugins(
+        # version provider
+        [ 'Git::NextVersion'        => {
+                'version_regexp' => $self->payload->{'GitNextVersion.version_regexp'} ||
+                                    '^([\d._]+)(-TRIAL)?$'
+            }
+        ],
         [ 'GatherDir'               => $gather_dir__options ],
         [ 'PruneCruft'              => {} ],
 
@@ -182,6 +188,21 @@ sub configure {
         [ 'ConfirmRelease'          => {} ],
         [ ($self->fake_release ? 'FakeRelease' : 'UploadToCPAN') => {} ],
 
+        [ 'Git::Tag'                => {
+                'tag_format' => $self->payload->{'GitTag.tag_format'} ||
+                                    '%v%t',
+                'tag_message' => $self->payload->{'GitTag.tag_message'} ||
+                                    'release v%v%t',
+
+            }
+        ],
+        [ 'Git::Commit'                => {
+                'commit_msg' => $self->payload->{'GitCommit.commit_msg'} ||
+                                    'bump Changes v%v%t [ci skip]',
+
+            }
+        ],
+
     );
 }
 
@@ -204,6 +225,9 @@ __END__
 
 This is a L<Dist::Zilla> PluginBundle. It is roughly equivalent to the
 following dist.ini:
+
+    [Git::NextVersion]
+    version_regexp = ^([\d._]+)(-TRIAL)?$
 
     [GatherDir]
     [PruneCruft]
@@ -279,6 +303,13 @@ following dist.ini:
     ;; release
     [ConfirmRelease]
     [UploadToCPAN]
+
+    [Git::Tag]
+    tag_format = %v%t
+    tag_message = release v%v%t
+
+    [Git::Commit]
+    commit_msg = bump Changes v%v%t [ci skip]
 
 =head1 OPTIONS
 
@@ -363,6 +394,30 @@ multiple values, e.g.
 
 See more at L<Dist::Zilla::Plugin::GatherDir>.
 
+=head2 GitNextVersion.version_regexp
+
+Regular expression that matches a tag containing a version. Default value is C<^([\d._]+)(-TRIAL)?$>.
+
+See more at L<Dist::Zilla::Plugin::Git::NextVersion>.
+
+=head2 GitTag.tag_format
+
+Format of the tag to apply. Default value is C<%v%t>.
+
+See more at L<Dist::Zilla::Plugin::Git::Tag>.
+
+=head2 GitTag.tag_message
+
+Format of the tag annotation. Default value is C<release v%v%t>.
+
+See more at L<Dist::Zilla::Plugin::Git::Tag>.
+
+=head2 GitCommit.commit_msg
+
+The commit message to use in commit after release. Default value is C<bump Changes v%v%t [ci skip]>.
+
+See more at L<Dist::Zilla::Plugin::Git::Commit>.
+
 =head1 METHODS
 
 =head2 configure
@@ -382,6 +437,8 @@ L<Dist::Zilla::Plugin::MetaNoIndex>
 L<Dist::Zilla::Plugin::NextRelease>
 
 L<Dist::Zilla::Plugin::GatherDir>
+
+L<Dist::Zilla::Plugin::Git>
 
 =cut
 

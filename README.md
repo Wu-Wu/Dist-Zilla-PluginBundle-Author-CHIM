@@ -6,12 +6,15 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 # VERSION
 
-version 0.050002
+version 0.050003
 
 # DESCRIPTION
 
 This is a [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla) PluginBundle. It is roughly equivalent to the
 following dist.ini:
+
+    [Git::NextVersion]
+    version_regexp = ^([\d._]+)(-TRIAL)?$
 
     [GatherDir]
     [PruneCruft]
@@ -87,6 +90,13 @@ following dist.ini:
     ;; release
     [ConfirmRelease]
     [UploadToCPAN]
+
+    [Git::Tag]
+    tag_format = %v%t
+    tag_message = release v%v%t
+
+    [Git::Commit]
+    commit_msg = bump Changes v%v%t [ci skip]
 
 # SYNOPSYS
 
@@ -180,6 +190,30 @@ multiple values, e.g.
 
 See more at [Dist::Zilla::Plugin::GatherDir](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir).
 
+## GitNextVersion.version\_regexp
+
+Regular expression that matches a tag containing a version. Default value is `^([\d._]+)(-TRIAL)?$`.
+
+See more at [Dist::Zilla::Plugin::Git::NextVersion](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::NextVersion).
+
+## GitTag.tag\_format
+
+Format of the tag to apply. Default value is `%v%t`.
+
+See more at [Dist::Zilla::Plugin::Git::Tag](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::Tag).
+
+## GitTag.tag\_message
+
+Format of the tag annotation. Default value is `release v%v%t`.
+
+See more at [Dist::Zilla::Plugin::Git::Tag](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::Tag).
+
+## GitCommit.commit\_msg
+
+The commit message to use in commit after release. Default value is `bump Changes v%v%t [ci skip]`.
+
+See more at [Dist::Zilla::Plugin::Git::Commit](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::Commit).
+
 # METHODS
 
 ## configure
@@ -199,6 +233,8 @@ Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](https://
 [Dist::Zilla::Plugin::NextRelease](https://metacpan.org/pod/Dist::Zilla::Plugin::NextRelease)
 
 [Dist::Zilla::Plugin::GatherDir](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir)
+
+[Dist::Zilla::Plugin::Git](https://metacpan.org/pod/Dist::Zilla::Plugin::Git)
 
 # AUTHOR
 
