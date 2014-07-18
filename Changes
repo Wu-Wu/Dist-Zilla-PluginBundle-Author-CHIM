@@ -2,6 +2,8 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
 
 {{$NEXT}}
 
+0.051002 Fri Jul 18 06:33:43 2014 +0000
+
     [ FIXES ]
     - tagging release after changes have been commited
 
