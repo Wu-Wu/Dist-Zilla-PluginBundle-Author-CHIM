@@ -96,12 +96,12 @@ following dist.ini:
     [ConfirmRelease]
     [UploadToCPAN]
 
+    [Git::Commit]
+    commit_msg = bump Changes v%v%t [ci skip]
+
     [Git::Tag]
     tag_format = %v%t
     tag_message = release v%v%t
-
-    [Git::Commit]
-    commit_msg = bump Changes v%v%t [ci skip]
 
 # SYNOPSYS
 
