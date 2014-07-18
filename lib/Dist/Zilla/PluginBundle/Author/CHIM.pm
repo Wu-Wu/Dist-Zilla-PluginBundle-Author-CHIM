@@ -98,25 +98,26 @@ sub configure {
 
     $self->add_plugins(
         # version provider
-        [ 'Git::NextVersion'        => {
+        [ 'Git::NextVersion' => {
+                ':version'       => '2.023',
                 'version_regexp' => $self->payload->{'GitNextVersion.version_regexp'} ||
                                     '^([\d._]+)(-TRIAL)?$'
             }
         ],
-        [ 'GatherDir'               => $gather_dir__options ],
-        [ 'PruneCruft'              => {} ],
+        [ 'GatherDir' => $gather_dir__options ],
+        [ 'PruneCruft' => {} ],
 
         # modified files
-        [ 'OurPkgVersion'           => {} ],
-        [ 'PodWeaver'               => {} ],
-        [ 'NextRelease'             => {
+        [ 'OurPkgVersion' => {} ],
+        [ 'PodWeaver' => {} ],
+        [ 'NextRelease' => {
                 'time_zone' => $self->payload->{'NextRelease.time_zone'} ||
                                     'UTC',
                 'format'    => $self->payload->{'NextRelease.format'} ||
                                     '%-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d'
             }
         ],
-        [ 'Authority'               => {
+        [ 'Authority' => {
                 'authority'      => $self->authority,
                 'do_metadata'    => 1,
                 'locate_comment' => 1,
@@ -124,10 +125,10 @@ sub configure {
         ],
 
         # generated files
-        [ 'License'                 => {} ],
-        [ 'ReadmeFromPod'           => {} ],
-        [ 'ReadmeAnyFromPod'        => {} ],
-        [ 'ReadmeAnyFromPod'        =>
+        [ 'License' => {} ],
+        [ 'ReadmeFromPod' => {} ],
+        [ 'ReadmeAnyFromPod' => {} ],
+        [ 'ReadmeAnyFromPod' =>
             'ReadmeMdInRoot' => {
                 'type'     => 'markdown',
                 'filename' => 'README.md',
@@ -135,17 +136,18 @@ sub configure {
             },
         ],
 
-        [ 'TravisCI::StatusBadge'   => {
+        [ 'TravisCI::StatusBadge' => {
+                ':version'  => '0.004',
                 'user'      => $self->github_username,
                 'repo'      => $self->github_reponame,
                 'vector'    => 1,
             },
         ],
 
-        [ 'MetaNoIndex'             => $meta_no_index__options ],
+        [ 'MetaNoIndex' => $meta_no_index__options ],
 
         # set META resources
-        [ 'MetaResources'           => {
+        [ 'MetaResources' => {
                 'homepage'        => 'https://metacpan.org/release/' . $self->dist,
                 'repository.url'  => 'https://' . $self->github_repopath . '.git',
                 'repository.web'  => 'https://' . $self->github_repopath,
@@ -155,61 +157,64 @@ sub configure {
         ],
 
         # add 'provides' to META
-        [ 'MetaProvides::Package'   => {
-                'meta_noindex' => 1,
-            },
-        ],
+        [ 'MetaProvides::Package' => { 'meta_noindex' => 1 } ],
 
         # META files
-        [ 'MetaYAML'                => {} ],
-        [ 'MetaJSON'                => {} ],
+        [ 'MetaYAML' => {} ],
+        [ 'MetaJSON' => {} ],
 
         # t tests
-        [ 'Test::Compile'           => {
-                'fake_home' => 1
+        [ 'Test::Compile' => { 'fake_home' => 1 } ],
+
+        # xt tests
+        [ 'ExtraTests' => {} ],
+        [ 'MetaTests' => {} ],
+        [ 'PodSyntaxTests' => {} ],
+        [ 'PodCoverageTests' => {} ],
+        [ 'Test::Version' => {} ],
+        [ 'Test::Kwalitee' => {} ],
+        [ 'Test::EOL' => {} ],
+        [ 'Test::NoTabs' => {} ],
+
+        # build
+        [ 'MakeMaker' => {} ],
+        [ 'Manifest' => {} ],
+
+        [ 'Git::Check' => {
+                'allow_dirty' => $self->payload->{'GitCheck.allow_dirty'} ||
+                                    [qw( dist.ini Changes )],
+                'untracked_files' => $self->payload->{'GitCheck.untracked_files'} ||
+                                    'die',
             }
         ],
 
-        # xt tests
-        [ 'ExtraTests'              => {} ],
-        [ 'MetaTests'               => {} ],
-        [ 'PodSyntaxTests'          => {} ],
-        [ 'PodCoverageTests'        => {} ],
-        [ 'Test::Version'           => {} ],
-        [ 'Test::Kwalitee'          => {} ],
-        [ 'Test::EOL'               => {} ],
-        [ 'Test::NoTabs'            => {} ],
-
-        # build
-        [ 'MakeMaker'               => {} ],
-        [ 'Manifest'                => {} ],
-
         # release
-        [ 'ConfirmRelease'          => {} ],
+        [ 'ConfirmRelease' => {} ],
         [ ($self->fake_release ? 'FakeRelease' : 'UploadToCPAN') => {} ],
 
-        [ 'Git::Tag'                => {
+        [ 'Git::Tag' => {
                 'tag_format' => $self->payload->{'GitTag.tag_format'} ||
                                     '%v%t',
                 'tag_message' => $self->payload->{'GitTag.tag_message'} ||
                                     'release v%v%t',
-
             }
         ],
-        [ 'Git::Commit'                => {
+        [ 'Git::Commit' => {
                 'commit_msg' => $self->payload->{'GitCommit.commit_msg'} ||
                                     'bump Changes v%v%t [ci skip]',
-
             }
         ],
-
     );
 }
 
 __PACKAGE__->meta->make_immutable;
+
 no Moose;
+
 1;
+
 __END__
+
 =pod
 
 =head1 SYNOPSYS
@@ -299,6 +304,11 @@ following dist.ini:
     ;; build
     [MakeMaker]
     [Manifest]
+
+    [Git::Check]
+    allow_dirty = dist.ini
+    allow_dirty = Changes
+    untracked_files = die
 
     ;; release
     [ConfirmRelease]
@@ -417,6 +427,19 @@ See more at L<Dist::Zilla::Plugin::Git::Tag>.
 The commit message to use in commit after release. Default value is C<bump Changes v%v%t [ci skip]>.
 
 See more at L<Dist::Zilla::Plugin::Git::Commit>.
+
+=head2 GitCheck.allow_dirty
+
+File that is allowed to have local modifications. This option may appear multiple times. The default
+list is C<dist.ini> and C<Changes>.
+
+See more at L<Dist::Zilla::Plugin::Git::Check>.
+
+=head2 GitCheck.untracked_files
+
+The commit message to use in commit after release. Default value is C<die>.
+
+See more at L<Dist::Zilla::Plugin::Git::Check>.
 
 =head1 METHODS
 

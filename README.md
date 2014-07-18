@@ -87,6 +87,11 @@ following dist.ini:
     [MakeMaker]
     [Manifest]
 
+    [Git::Check]
+    allow_dirty = dist.ini
+    allow_dirty = Changes
+    untracked_files = die
+
     ;; release
     [ConfirmRelease]
     [UploadToCPAN]
@@ -213,6 +218,19 @@ See more at [Dist::Zilla::Plugin::Git::Tag](https://metacpan.org/pod/Dist::Zilla
 The commit message to use in commit after release. Default value is `bump Changes v%v%t [ci skip]`.
 
 See more at [Dist::Zilla::Plugin::Git::Commit](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::Commit).
+
+## GitCheck.allow\_dirty
+
+File that is allowed to have local modifications. This option may appear multiple times. The default
+list is `dist.ini` and `Changes`.
+
+See more at [Dist::Zilla::Plugin::Git::Check](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::Check).
+
+## GitCheck.untracked\_files
+
+The commit message to use in commit after release. Default value is `die`.
+
+See more at [Dist::Zilla::Plugin::Git::Check](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::Check).
 
 # METHODS
 
