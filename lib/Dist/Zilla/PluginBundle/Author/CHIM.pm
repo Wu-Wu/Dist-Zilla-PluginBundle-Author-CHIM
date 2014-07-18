@@ -193,16 +193,16 @@ sub configure {
         [ 'ConfirmRelease' => {} ],
         [ ($self->fake_release ? 'FakeRelease' : 'UploadToCPAN') => {} ],
 
+        [ 'Git::Commit' => {
+                'commit_msg' => $self->payload->{'GitCommit.commit_msg'} ||
+                                    'bump Changes v%v%t [ci skip]',
+            }
+        ],
         [ 'Git::Tag' => {
                 'tag_format' => $self->payload->{'GitTag.tag_format'} ||
                                     '%v%t',
                 'tag_message' => $self->payload->{'GitTag.tag_message'} ||
                                     'release v%v%t',
-            }
-        ],
-        [ 'Git::Commit' => {
-                'commit_msg' => $self->payload->{'GitCommit.commit_msg'} ||
-                                    'bump Changes v%v%t [ci skip]',
             }
         ],
     );
