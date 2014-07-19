@@ -9,7 +9,11 @@ use warnings;
 use Moose;
 
 use Dist::Zilla;
-with 'Dist::Zilla::Role::PluginBundle::Easy';
+
+with qw(
+    Dist::Zilla::Role::PluginBundle::Easy
+    Dist::Zilla::Role::PluginBundle::PluginRemover
+);
 
 has dist => (
     is       => 'ro',
@@ -323,6 +327,14 @@ following dist.ini:
     tag_message = release v%v%t
 
 =head1 OPTIONS
+
+=head2 -remove
+
+Removes a plugin. Might be used multiple times.
+
+    [@Author::CHIM]
+    -remove = PodCoverageTests
+    -remove = Test::Kwalitee
 
 =head2 dist
 

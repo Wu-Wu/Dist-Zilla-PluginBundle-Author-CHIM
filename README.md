@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 # VERSION
 
-version 0.051002
+version 0.051003
 
 # DESCRIPTION
 
@@ -113,6 +113,14 @@ following dist.ini:
     github_reponame = perl5-My-Very-Cool-Module
 
 # OPTIONS
+
+## -remove
+
+Removes a plugin. Might be used multiple times.
+
+    [@Author::CHIM]
+    -remove = PodCoverageTests
+    -remove = Test::Kwalitee
 
 ## dist
 

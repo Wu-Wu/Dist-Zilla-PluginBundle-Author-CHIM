@@ -13,6 +13,7 @@ before_install:
     - "cpanm -n -q Dist::Zilla::Plugin::Test::NoTabs"
     - "cpanm -n -q Dist::Zilla::Plugin::TravisCI::StatusBadge"
     - "cpanm -n -q Dist::Zilla::Plugin::Git"
+    - "cpanm -n -q Dist::Zilla::Role::PluginBundle::PluginRemover"
 
 install:
     - "dzil authordeps -I lib | xargs cpanm -q -n && dzil listdeps -I lib | xargs cpanm -q -n"
