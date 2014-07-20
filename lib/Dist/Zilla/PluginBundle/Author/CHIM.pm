@@ -327,7 +327,7 @@ The name of the distribution. Required.
 =head2 authority
 
 This one is used to set name the CPAN author of the distibution. It should be something like C<cpan:PAUSEID>.
-Default value is I<cpan:CHIM>.
+Default value is C<cpan:CHIM>.
 
 =head2 github.user
 
@@ -336,7 +336,7 @@ and L<Dist::Zilla::Plugin::TravisCI::StatusBadge>.
 
 =head2 github.repo
 
-Indicates github.com's repository name. Default value is set to value of the L<dist> attribute.
+Indicates github.com's repository name. Default value is set to value of the L</dist> option.
 Used by L<Dist::Zilla::Plugin::GithubMeta> and L<Dist::Zilla::Plugin::TravisCI::StatusBadge>.
 
 =head2 fake_release

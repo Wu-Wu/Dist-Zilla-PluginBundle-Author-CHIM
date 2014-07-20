@@ -127,7 +127,7 @@ The name of the distribution. Required.
 ## authority
 
 This one is used to set name the CPAN author of the distibution. It should be something like `cpan:PAUSEID`.
-Default value is _cpan:CHIM_.
+Default value is `cpan:CHIM`.
 
 ## github.user
 
@@ -136,7 +136,7 @@ and [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::
 
 ## github.repo
 
-Indicates github.com's repository name. Default value is set to value of the [dist](https://metacpan.org/pod/dist) attribute.
+Indicates github.com's repository name. Default value is set to value of the ["dist"](#dist) option.
 Used by [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta) and [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge).
 
 ## fake\_release
