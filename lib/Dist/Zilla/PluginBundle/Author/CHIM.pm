@@ -22,20 +22,6 @@ has dist => (
     default  => sub { $_[0]->payload->{dist} },
 );
 
-has authority => (
-    is       => 'ro',
-    isa      => 'Str',
-    lazy     => 1,
-    default  => sub { $_[0]->payload->{authority} || 'cpan:CHIM' },
-);
-
-has fake_release => (
-    is       => 'ro',
-    isa      => 'Bool',
-    lazy     => 1,
-    default  => sub { $_[0]->payload->{fake_release} || 0 },
-);
-
 =for Pod::Coverage mvp_multivalue_args
 
 =cut
@@ -117,7 +103,7 @@ sub configure {
             }
         ],
         [ 'Authority' => {
-                'authority'      => $self->authority,
+                'authority'      => $self->payload->{'authority'} || 'cpan:CHIM',
                 'do_metadata'    => 1,
                 'locate_comment' => 1,
             }
@@ -181,7 +167,7 @@ sub configure {
 
         # release
         [ 'ConfirmRelease' => {} ],
-        [ ($self->fake_release ? 'FakeRelease' : 'UploadToCPAN') => {} ],
+        [ ( $ENV{FAKE} || $self->payload->{'fake_release'} ? 'FakeRelease' : 'UploadToCPAN' ) => {} ],
 
         [ 'Git::Commit' => {
                 'commit_msg' => $self->payload->{'GitCommit.commit_msg'} ||
@@ -468,6 +454,20 @@ See more at L<Dist::Zilla::Plugin::GithubMeta>.
 =head2 configure
 
 Bundle's configuration for role L<Dist::Zilla::Role::PluginBundle::Easy>.
+
+=head1 FAKE RELEASE
+
+Use option C<fake_release> in bundle configuration:
+
+    [@Author::CHIM]
+    ...
+    fake_release = 1
+
+or environment variable C<FAKE>:
+
+    FAKE=1 dzil release
+
+The distribution won't be uploaded to the CPAN if option or variable will found.
 
 =head1 SEE ALSO
 

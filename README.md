@@ -269,6 +269,20 @@ See more at [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zil
 
 Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](https://metacpan.org/pod/Dist::Zilla::Role::PluginBundle::Easy).
 
+# FAKE RELEASE
+
+Use option `fake_release` in bundle configuration:
+
+    [@Author::CHIM]
+    ...
+    fake_release = 1
+
+or environment variable `FAKE`:
+
+    FAKE=1 dzil release
+
+The distribution won't be uploaded to the CPAN if option or variable will found.
+
 # SEE ALSO
 
 [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
