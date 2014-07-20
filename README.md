@@ -139,10 +139,6 @@ and [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::
 Indicates github.com's repository name. Default value is set to value of the ["dist"](#dist) option.
 Used by [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta) and [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge).
 
-## fake\_release
-
-Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is _0_.
-
 ## NextRelease.time\_zone
 
 Timezone for entries in **Changes** file. Default value is `UTC`.
@@ -281,7 +277,7 @@ or environment variable `FAKE`:
 
     FAKE=1 dzil release
 
-The distribution won't be uploaded to the CPAN if option or variable will found.
+The distribution won't actually uploaded to the CPAN if option or variable will found.
 
 # SEE ALSO
 

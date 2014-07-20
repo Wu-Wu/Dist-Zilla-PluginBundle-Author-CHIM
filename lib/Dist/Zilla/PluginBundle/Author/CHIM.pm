@@ -325,10 +325,6 @@ and L<Dist::Zilla::Plugin::TravisCI::StatusBadge>.
 Indicates github.com's repository name. Default value is set to value of the L</dist> option.
 Used by L<Dist::Zilla::Plugin::GithubMeta> and L<Dist::Zilla::Plugin::TravisCI::StatusBadge>.
 
-=head2 fake_release
-
-Replaces UploadToCPAN with FakeRelease so release won't actually uploaded. Default value is I<0>.
-
 =head2 NextRelease.time_zone
 
 Timezone for entries in B<Changes> file. Default value is C<UTC>.
@@ -467,7 +463,7 @@ or environment variable C<FAKE>:
 
     FAKE=1 dzil release
 
-The distribution won't be uploaded to the CPAN if option or variable will found.
+The distribution won't actually uploaded to the CPAN if option or variable will found.
 
 =head1 SEE ALSO
 
