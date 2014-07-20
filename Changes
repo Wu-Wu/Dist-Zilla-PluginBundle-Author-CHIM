@@ -2,6 +2,8 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
 
 {{$NEXT}}
 
+0.051003 Sun Jul 20 18:51:30 2014 +0000
+
     [ FEATURES ]
     - added remove plugins functionality (via PluginRemover)
     - MetaResources replaced with GithubMeta
