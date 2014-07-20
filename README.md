@@ -40,8 +40,8 @@ following dist.ini:
     location = root
 
     [TravisCI::StatusBadge]
-    user = %{github_username}
-    repo = %{github_reponame}
+    user = %{github.user}
+    repo = %{github.repo} || %{dist}
     vector = 1
 
     [MetaNoIndex]
@@ -53,13 +53,12 @@ following dist.ini:
     package   = DB
     namespace = t::lib
 
-    ;; set META resources
-    [MetaResources]
-    homepage        = https://metacpan.org/release/%{dist}
-    repository.url  = https://%{github_repopath}.git
-    repository.web  = https://%{github_repopath}
-    bugtracker.web  = https://%{github_repopath}/issues
-    repository.type = git
+    [GithubMeta]
+    homepage = https://metacpan.org/release/%{dist}
+    remote = origin
+    remote = github
+    remote = gh
+    issues = 1
 
     ;; add 'provides' to META
     [MetaProvides::Package]
@@ -109,8 +108,7 @@ following dist.ini:
     [@Author::CHIM]
     dist            = My-Very-Cool-Module
     authority       = cpan:CHIM
-    github_username = Wu-Wu
-    github_reponame = perl5-My-Very-Cool-Module
+    github.user     = Wu-Wu
 
 # OPTIONS
 
@@ -131,13 +129,15 @@ The name of the distribution. Required.
 This one is used to set name the CPAN author of the distibution. It should be something like `cpan:PAUSEID`.
 Default value is _cpan:CHIM_.
 
-## github\_username
+## github.user
 
-Indicates github.com's account name. Default value is _Wu-Wu_.
+Indicates github.com's account name. Default value is `Wu-Wu`. Used by [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
+and [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge).
 
-## github\_reponame
+## github.repo
 
-Indicates github.com's repository name. Default value is set to value of the _dist_-attribute name.
+Indicates github.com's repository name. Default value is set to value of the [dist](https://metacpan.org/pod/dist) attribute.
+Used by [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta) and [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge).
 
 ## fake\_release
 
@@ -240,6 +240,29 @@ The commit message to use in commit after release. Default value is `die`.
 
 See more at [Dist::Zilla::Plugin::Git::Check](https://metacpan.org/pod/Dist::Zilla::Plugin::Git::Check).
 
+## GithubMeta.homepage
+
+Homepage of the distribution. Default value is `https://metacpan.org/release/%{dist}`.
+
+See more at [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta).
+
+## GithubMeta.remote
+
+Remote names to inspect for github repository. Default values are `origin`, `github`, `gh`. You can
+provide multiple remote names
+
+    [@Author::CHIM]
+    GithubMeta.remote = foo
+    GithubMeta.remote = bar
+
+See more at [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta).
+
+## GithubMeta.issues
+
+Inserts a bugtracker url to metadata. Default value is `1`.
+
+See more at [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta).
+
 # METHODS
 
 ## configure
@@ -261,6 +284,10 @@ Bundle's configuration for role [Dist::Zilla::Role::PluginBundle::Easy](https://
 [Dist::Zilla::Plugin::GatherDir](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir)
 
 [Dist::Zilla::Plugin::Git](https://metacpan.org/pod/Dist::Zilla::Plugin::Git)
+
+[Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge)
+
+[Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
 
 # AUTHOR
 

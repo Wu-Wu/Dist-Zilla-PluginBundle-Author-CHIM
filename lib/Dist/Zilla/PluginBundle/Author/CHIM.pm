@@ -29,27 +29,6 @@ has authority => (
     default  => sub { $_[0]->payload->{authority} || 'cpan:CHIM' },
 );
 
-has github_username => (
-    is       => 'ro',
-    isa      => 'Str',
-    lazy     => 1,
-    default  => sub { $_[0]->payload->{github_username} || 'Wu-Wu' },
-);
-
-has github_reponame => (
-    is       => 'ro',
-    isa      => 'Str',
-    lazy     => 1,
-    default  => sub { $_[0]->payload->{github_reponame} || $_[0]->dist },
-);
-
-has github_repopath => (
-    is       => 'ro',
-    isa      => 'Str',
-    lazy     => 1,
-    default  => sub { join '/' => 'github.com', $_[0]->github_username, $_[0]->github_reponame },
-);
-
 has fake_release => (
     is       => 'ro',
     isa      => 'Bool',
@@ -69,6 +48,7 @@ sub mvp_multivalue_args {
         MetaNoIndex.file
         GatherDir.exclude_match
         GitCheck.allow_dirty
+        GithubMeta.remote
     );
 }
 
@@ -98,6 +78,20 @@ sub configure {
         ( $self->payload->{'GatherDir.exclude_match'}
             ? ( 'exclude_match' => $self->payload->{'GatherDir.exclude_match'} )
             : ( )
+        ),
+    };
+
+    my $github_meta__options = {
+        'homepage'  => $self->payload->{'GithubMeta.homepage'} ||
+                            'https://metacpan.org/release/' . $self->dist,
+        'remote'    => $self->payload->{'GithubMeta.remote'} ||
+                            [qw( origin github gh )],
+        'issues'    => $self->payload->{'GithubMeta.issues'} || 1,
+        ( $self->payload->{'user'} ?
+            ( 'user' => $self->payload->{'github.user'} ) : ( )
+        ),
+        ( $self->payload->{'repo'} ?
+            ( 'repo' => $self->payload->{'github.repo'} ) : ( )
         ),
     };
 
@@ -143,23 +137,15 @@ sub configure {
 
         [ 'TravisCI::StatusBadge' => {
                 ':version'  => '0.004',
-                'user'      => $self->github_username,
-                'repo'      => $self->github_reponame,
+                'user'      => $self->payload->{'github.user'} || 'Wu-Wu',
+                'repo'      => $self->payload->{'github.repo'} || $self->dist,
                 'vector'    => 1,
             },
         ],
 
         [ 'MetaNoIndex' => $meta_no_index__options ],
 
-        # set META resources
-        [ 'MetaResources' => {
-                'homepage'        => 'https://metacpan.org/release/' . $self->dist,
-                'repository.url'  => 'https://' . $self->github_repopath . '.git',
-                'repository.web'  => 'https://' . $self->github_repopath,
-                'bugtracker.web'  => 'https://' . $self->github_repopath . '/issues',
-                'repository.type' => 'git',
-            },
-        ],
+        [ 'GithubMeta' => $github_meta__options ],
 
         # add 'provides' to META
         [ 'MetaProvides::Package' => { 'meta_noindex' => 1 } ],
@@ -228,8 +214,7 @@ __END__
     [@Author::CHIM]
     dist            = My-Very-Cool-Module
     authority       = cpan:CHIM
-    github_username = Wu-Wu
-    github_reponame = perl5-My-Very-Cool-Module
+    github.user     = Wu-Wu
 
 =head1 DESCRIPTION
 
@@ -263,8 +248,8 @@ following dist.ini:
     location = root
 
     [TravisCI::StatusBadge]
-    user = %{github_username}
-    repo = %{github_reponame}
+    user = %{github.user}
+    repo = %{github.repo} || %{dist}
     vector = 1
 
     [MetaNoIndex]
@@ -276,13 +261,12 @@ following dist.ini:
     package   = DB
     namespace = t::lib
 
-    ;; set META resources
-    [MetaResources]
-    homepage        = https://metacpan.org/release/%{dist}
-    repository.url  = https://%{github_repopath}.git
-    repository.web  = https://%{github_repopath}
-    bugtracker.web  = https://%{github_repopath}/issues
-    repository.type = git
+    [GithubMeta]
+    homepage = https://metacpan.org/release/%{dist}
+    remote = origin
+    remote = github
+    remote = gh
+    issues = 1
 
     ;; add 'provides' to META
     [MetaProvides::Package]
@@ -345,13 +329,15 @@ The name of the distribution. Required.
 This one is used to set name the CPAN author of the distibution. It should be something like C<cpan:PAUSEID>.
 Default value is I<cpan:CHIM>.
 
-=head2 github_username
+=head2 github.user
 
-Indicates github.com's account name. Default value is I<Wu-Wu>.
+Indicates github.com's account name. Default value is C<Wu-Wu>. Used by L<Dist::Zilla::Plugin::GithubMeta>
+and L<Dist::Zilla::Plugin::TravisCI::StatusBadge>.
 
-=head2 github_reponame
+=head2 github.repo
 
-Indicates github.com's repository name. Default value is set to value of the I<dist>-attribute name.
+Indicates github.com's repository name. Default value is set to value of the L<dist> attribute.
+Used by L<Dist::Zilla::Plugin::GithubMeta> and L<Dist::Zilla::Plugin::TravisCI::StatusBadge>.
 
 =head2 fake_release
 
@@ -454,6 +440,29 @@ The commit message to use in commit after release. Default value is C<die>.
 
 See more at L<Dist::Zilla::Plugin::Git::Check>.
 
+=head2 GithubMeta.homepage
+
+Homepage of the distribution. Default value is C<https://metacpan.org/release/%{dist}>.
+
+See more at L<Dist::Zilla::Plugin::GithubMeta>.
+
+=head2 GithubMeta.remote
+
+Remote names to inspect for github repository. Default values are C<origin>, C<github>, C<gh>. You can
+provide multiple remote names
+
+    [@Author::CHIM]
+    GithubMeta.remote = foo
+    GithubMeta.remote = bar
+
+See more at L<Dist::Zilla::Plugin::GithubMeta>.
+
+=head2 GithubMeta.issues
+
+Inserts a bugtracker url to metadata. Default value is C<1>.
+
+See more at L<Dist::Zilla::Plugin::GithubMeta>.
+
 =head1 METHODS
 
 =head2 configure
@@ -475,6 +484,10 @@ L<Dist::Zilla::Plugin::NextRelease>
 L<Dist::Zilla::Plugin::GatherDir>
 
 L<Dist::Zilla::Plugin::Git>
+
+L<Dist::Zilla::Plugin::TravisCI::StatusBadge>
+
+L<Dist::Zilla::Plugin::GithubMeta>
 
 =cut
 
