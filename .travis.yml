@@ -32,6 +32,7 @@ before_install:
 
 install:
     - "dzil authordeps -I lib | xargs cpanm -q -n && dzil listdeps -I lib | xargs cpanm -q -n"
+    - "cpanm -f -U Dist::Zilla::PluginBundle::Author::CHIM"
 
 script:
     - "dzil test --release -I lib"

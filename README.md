@@ -32,7 +32,11 @@ following dist.ini:
 
     ;; generated files
     [License]
-    [ReadmeFromPod]
+
+    [ReadmeAnyFromPod / ReadmeInBuild]
+    type     = text
+    filename = README
+    location = build
 
     [ReadmeAnyFromPod / ReadmeMdInRoot]
     type     = markdown

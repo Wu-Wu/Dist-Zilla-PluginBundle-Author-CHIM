@@ -111,7 +111,17 @@ sub configure {
 
         # generated files
         [ 'License' => {} ],
-        [ 'ReadmeFromPod' => {} ],
+
+        # README
+        [ 'ReadmeAnyFromPod' =>
+            'ReadmeInBuild' => {
+                'type'     => 'text',
+                'filename' => 'README',
+                'location' => 'build',
+            },
+        ],
+
+        # README.md
         [ 'ReadmeAnyFromPod' =>
             'ReadmeMdInRoot' => {
                 'type'     => 'markdown',
@@ -223,7 +233,11 @@ following dist.ini:
 
     ;; generated files
     [License]
-    [ReadmeFromPod]
+
+    [ReadmeAnyFromPod / ReadmeInBuild]
+    type     = text
+    filename = README
+    location = build
 
     [ReadmeAnyFromPod / ReadmeMdInRoot]
     type     = markdown
