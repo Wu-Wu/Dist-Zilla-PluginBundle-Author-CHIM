@@ -112,7 +112,6 @@ sub configure {
         # generated files
         [ 'License' => {} ],
         [ 'ReadmeFromPod' => {} ],
-        [ 'ReadmeAnyFromPod' => {} ],
         [ 'ReadmeAnyFromPod' =>
             'ReadmeMdInRoot' => {
                 'type'     => 'markdown',
@@ -122,9 +121,7 @@ sub configure {
         ],
 
         [ 'TravisCI::StatusBadge' => {
-                ':version'  => '0.004',
-                'user'      => $self->payload->{'github.user'} || 'Wu-Wu',
-                'repo'      => $self->payload->{'github.repo'} || $self->dist,
+                ':version'  => '0.005',
                 'vector'    => 1,
             },
         ],
@@ -227,15 +224,13 @@ following dist.ini:
     ;; generated files
     [License]
     [ReadmeFromPod]
-    [ReadmeAnyFromPod]
+
     [ReadmeAnyFromPod / ReadmeMdInRoot]
     type     = markdown
     filename = README.md
     location = root
 
     [TravisCI::StatusBadge]
-    user = %{github.user}
-    repo = %{github.repo} || %{dist}
     vector = 1
 
     [MetaNoIndex]

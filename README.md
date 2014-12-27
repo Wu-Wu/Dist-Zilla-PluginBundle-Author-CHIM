@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 # VERSION
 
-version 0.051003
+version 0.051004
 
 # DESCRIPTION
 
@@ -33,15 +33,13 @@ following dist.ini:
     ;; generated files
     [License]
     [ReadmeFromPod]
-    [ReadmeAnyFromPod]
+
     [ReadmeAnyFromPod / ReadmeMdInRoot]
     type     = markdown
     filename = README.md
     location = root
 
     [TravisCI::StatusBadge]
-    user = %{github.user}
-    repo = %{github.repo} || %{dist}
     vector = 1
 
     [MetaNoIndex]
