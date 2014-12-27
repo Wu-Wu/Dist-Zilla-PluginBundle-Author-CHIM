@@ -2,6 +2,8 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
 
 {{$NEXT}}
 
+0.052001 Sat Dec 27 17:40:03 2014 +0000
+
     [ FEATURES ]
     - update TravisCI::StatusBadge to 0.005
     - replace ReadmeFromPod with ReadmeAnyFromPod
