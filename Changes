@@ -9,7 +9,10 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
     - start using Bootstrap::lib
 
     [ TESTS ]
-    - added besic tests
+    - added basic tests
+
+    [ FIXES ]
+    - fixed github's repo/user parameters
 
 0.052002 Sat Jan 3 12:25:53 2015 +0000
 

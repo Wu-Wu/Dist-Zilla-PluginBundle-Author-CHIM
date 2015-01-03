@@ -28,6 +28,8 @@ my $tzil = Builder->from_config(
                 $root_config,
                 [ '@Author::CHIM' => {
                         'dist' => 'FooBarBaz',
+                        'github.user' => 'john',
+                        'github.repo' => 'FooBarBaz-pm',
                     }
                 ]
             ),
@@ -36,5 +38,31 @@ my $tzil = Builder->from_config(
 );
 
 ok( $tzil->build, 'build dist with @Author::CHIM' );
+
+my $meta = $tzil->distmeta;
+
+is(
+    $meta->{resources}{homepage},
+    'https://metacpan.org/release/FooBarBaz',
+    'homepage from META'
+);
+
+is(
+    $meta->{resources}{repository}{url},
+    'https://github.com/john/FooBarBaz-pm.git',
+    'repository URL from META'
+);
+
+is(
+    $meta->{abstract},
+    'FooBarBaz module',
+    'abstract from META'
+);
+
+is(
+    ref $meta->{provides}{FooBarBaz},
+    'HASH',
+    'dist provides module'
+);
 
 done_testing;
