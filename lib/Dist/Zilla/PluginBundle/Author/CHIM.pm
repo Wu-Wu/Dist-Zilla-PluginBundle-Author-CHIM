@@ -74,10 +74,10 @@ sub configure {
         'remote'    => $self->payload->{'GithubMeta.remote'} ||
                             [qw( origin github gh )],
         'issues'    => $self->payload->{'GithubMeta.issues'} || 1,
-        ( $self->payload->{'user'} ?
+        ( $self->payload->{'github.user'} ?
             ( 'user' => $self->payload->{'github.user'} ) : ( )
         ),
-        ( $self->payload->{'repo'} ?
+        ( $self->payload->{'github.repo'} ?
             ( 'repo' => $self->payload->{'github.repo'} ) : ( )
         ),
     };
