@@ -490,23 +490,23 @@ The distribution won't actually uploaded to the CPAN if option or variable will 
 
 =head1 SEE ALSO
 
-L<Dist::Zilla>
+Dist::Zilla
 
-L<Dist::Zilla::Role::PluginBundle::Easy>
+Dist::Zilla::Role::PluginBundle::Easy
 
-L<Dist::Zilla::Plugin::Authority>
+Dist::Zilla::Plugin::Authority
 
-L<Dist::Zilla::Plugin::MetaNoIndex>
+Dist::Zilla::Plugin::MetaNoIndex
 
-L<Dist::Zilla::Plugin::NextRelease>
+Dist::Zilla::Plugin::NextRelease
 
-L<Dist::Zilla::Plugin::GatherDir>
+Dist::Zilla::Plugin::GatherDir
 
-L<Dist::Zilla::Plugin::Git>
+Dist::Zilla::Plugin::Git
 
-L<Dist::Zilla::Plugin::TravisCI::StatusBadge>
+Dist::Zilla::Plugin::TravisCI::StatusBadge
 
-L<Dist::Zilla::Plugin::GithubMeta>
+Dist::Zilla::Plugin::GithubMeta
 
 =cut
 

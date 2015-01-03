@@ -292,23 +292,17 @@ The distribution won't actually uploaded to the CPAN if option or variable will 
 
 # SEE ALSO
 
-[Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
+Please see those modules/websites for more information related to this module.
 
-[Dist::Zilla::Role::PluginBundle::Easy](https://metacpan.org/pod/Dist::Zilla::Role::PluginBundle::Easy)
-
-[Dist::Zilla::Plugin::Authority](https://metacpan.org/pod/Dist::Zilla::Plugin::Authority)
-
-[Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex)
-
-[Dist::Zilla::Plugin::NextRelease](https://metacpan.org/pod/Dist::Zilla::Plugin::NextRelease)
-
-[Dist::Zilla::Plugin::GatherDir](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir)
-
-[Dist::Zilla::Plugin::Git](https://metacpan.org/pod/Dist::Zilla::Plugin::Git)
-
-[Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge)
-
-[Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
+- [Dist::Zilla](https://metacpan.org/pod/Dist::Zilla)
+- [Dist::Zilla::Role::PluginBundle::Easy](https://metacpan.org/pod/Dist::Zilla::Role::PluginBundle::Easy)
+- [Dist::Zilla::Plugin::Authority](https://metacpan.org/pod/Dist::Zilla::Plugin::Authority)
+- [Dist::Zilla::Plugin::MetaNoIndex](https://metacpan.org/pod/Dist::Zilla::Plugin::MetaNoIndex)
+- [Dist::Zilla::Plugin::NextRelease](https://metacpan.org/pod/Dist::Zilla::Plugin::NextRelease)
+- [Dist::Zilla::Plugin::GatherDir](https://metacpan.org/pod/Dist::Zilla::Plugin::GatherDir)
+- [Dist::Zilla::Plugin::Git](https://metacpan.org/pod/Dist::Zilla::Plugin::Git)
+- [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge)
+- [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
 
 # BUGS
 

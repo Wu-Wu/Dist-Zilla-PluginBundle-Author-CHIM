@@ -12,10 +12,60 @@ use namespace::autoclean;
 
 use Pod::Weaver 4;
 use Pod::Weaver::Config::Assembler;
+use Pod::Weaver::Section::SeeAlso;
+
+=head1 SYNOPSIS
+
+In C<weaver.ini>
+
+    [@CHIM]
+
+or in C<dist.ini>
+
+    [PodWeaver]
+    config_plugin = @CHIM
+
+=head1 DESCRIPTION
+
+This is config for L<Pod::Weaver> I use to build documentation for my modules.
 
 =head1 OVERVIEW
 
-todo...
+This plugin bundle is equivalent to the following C<weaver.ini> config:
+
+    [-SingleEnconding]
+
+    [@CorePrep]
+
+    [Name]
+    [Version]
+
+    [Region / prelude]
+
+    [Generic / SYNOPSIS]
+    [Generic / DESCRIPTION]
+    [Generic / OVERVIEW]
+
+    [Collect / TYPES]
+    command = type
+
+    [Collect / ATTRIBUTES]
+    command = attr
+
+    [Collect / METHODS]
+    command = method
+
+    [Collect / FUNCTIONS]
+    command = func
+
+    [Leftovers]
+
+    [Region / postlude]
+
+    [SeeAlso]
+    [Bugs]
+    [Author]
+    [Legal]
 
 =cut
 
@@ -28,9 +78,7 @@ sub _exp {
     return Pod::Weaver::Config::Assembler->expand_package( $package );
 }
 
-=method mvp_bundle_config
-
-todo...
+=for Pod::Coverage mvp_bundle_config
 
 =cut
 
@@ -42,10 +90,12 @@ sub mvp_bundle_config {
         [ '@CHIM/Version',          _exp('Version'),   {} ],
 
         [ '@CHIM/prelude',          _exp('Region'),  { region_name => 'prelude' } ],
+
         [ 'SYNOPSIS',               _exp('Generic'), {} ],
         [ 'DESCRIPTION',            _exp('Generic'), {} ],
         [ 'OVERVIEW',               _exp('Generic'), {} ],
 
+        [ 'TYPES',                  _exp('Collect'), { command => 'type' } ],
         [ 'ATTRIBUTES',             _exp('Collect'), { command => 'attr' } ],
         [ 'METHODS',                _exp('Collect'), { command => 'method' } ],
         [ 'FUNCTIONS',              _exp('Collect'), { command => 'func' } ],
@@ -54,10 +104,19 @@ sub mvp_bundle_config {
 
         [ '@CHIM/postlude',         _exp('Region'), { region_name => 'postlude' } ],
 
+        [ '@CHIM/SeeAlso',          _exp('SeeAlso'), {} ],
         [ '@CHIM/Bugs',             _exp('Bugs'),    {} ],
         [ '@CHIM/Authors',          _exp('Authors'), {} ],
         [ '@CHIM/Legal',            _exp('Legal'),   {} ],
     );
 }
+
+=head1 SEE ALSO
+
+Pod::Weaver
+
+Dist::Zilla::Plugin::PodWeaver
+
+=cut
 
 1;
