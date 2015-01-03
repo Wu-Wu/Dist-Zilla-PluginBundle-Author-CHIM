@@ -34,8 +34,9 @@ before_install:
     - "cpanm -n -q Dist::Zilla::Plugin::CheckExtraTests"
 
 install:
-    - "dzil authordeps -I lib | xargs cpanm -q -n && dzil listdeps -I lib | xargs cpanm -q -n"
+    - "dzil authordeps | xargs cpanm -q -n"
+    - "dzil listdeps | xargs cpanm -q -n"
     - "cpanm -f -U Dist::Zilla::PluginBundle::Author::CHIM"
 
 script:
-    - "dzil test --release -I lib"
+    - "dzil test --release"
