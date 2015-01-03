@@ -2,6 +2,9 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
 
 {{$NEXT}}
 
+    [ FEATURES ]
+    - removed MintingProfile::CHIM
+
 0.052002 Sat Jan 3 12:25:53 2015 +0000
 
     [ FEATURES ]
