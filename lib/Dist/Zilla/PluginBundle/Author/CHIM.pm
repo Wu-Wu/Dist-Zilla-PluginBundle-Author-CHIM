@@ -168,6 +168,7 @@ sub configure {
         [ 'MakeMaker' => {} ],
         [ 'Manifest' => {} ],
 
+        # run tests at xt/ on dzil test
         [ 'RunExtraTests' => { default_jobs => 7 } ],
 
         [ 'Git::Check' => {
@@ -285,7 +286,6 @@ following dist.ini:
     fake_home = 1
 
     ;; xt tests
-    [ExtraTests]
     [MetaTests]
     [PodSyntaxTests]
     [PodCoverageTests]
@@ -297,6 +297,10 @@ following dist.ini:
     ;; build
     [MakeMaker]
     [Manifest]
+
+    ;; run tests at xt/ on dzil test
+    [RunExtraTests]
+    default_jobs = 7
 
     [Git::Check]
     allow_dirty = dist.ini
