@@ -30,6 +30,7 @@ before_install:
     - "cpanm -n -q Dist::Zilla::Role::PluginBundle::PluginRemover"
     - "cpanm -n -q Dist::Zilla::Plugin::GithubMeta"
     - "cpanm -n -q Pod::Weaver::Section::SeeAlso"
+    - "cpanm -n -q Dist::Zilla::Plugin::CheckExtraTests"
 
 install:
     - "dzil authordeps -I lib | xargs cpanm -q -n && dzil listdeps -I lib | xargs cpanm -q -n"

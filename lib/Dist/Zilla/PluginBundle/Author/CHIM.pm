@@ -156,7 +156,6 @@ sub configure {
         [ 'Test::Compile' => { 'fake_home' => 1 } ],
 
         # xt tests
-        [ 'ExtraTests' => {} ],
         [ 'MetaTests' => {} ],
         [ 'PodSyntaxTests' => {} ],
         [ 'PodCoverageTests' => {} ],
@@ -168,6 +167,8 @@ sub configure {
         # build
         [ 'MakeMaker' => {} ],
         [ 'Manifest' => {} ],
+
+        [ 'RunExtraTests' => { default_jobs => 7 } ],
 
         [ 'Git::Check' => {
                 'allow_dirty' => $self->payload->{'GitCheck.allow_dirty'} ||
