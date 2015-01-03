@@ -6,6 +6,10 @@ Revision history for Perl extension Dist::Zilla::PluginBundle::Author::CHIM
     - removed MintingProfile::CHIM
     - extra tests located at xt/ dir now
     - added plugin to run extra tests
+    - start using Bootstrap::lib
+
+    [ TESTS ]
+    - added besic tests
 
 0.052002 Sat Jan 3 12:25:53 2015 +0000
 
