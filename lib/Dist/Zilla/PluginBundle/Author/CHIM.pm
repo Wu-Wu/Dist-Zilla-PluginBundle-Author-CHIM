@@ -35,6 +35,7 @@ sub mvp_multivalue_args {
         GatherDir.exclude_match
         GitCheck.allow_dirty
         GithubMeta.remote
+        PodWeaver.config_plugin
     );
 }
 
@@ -94,7 +95,11 @@ sub configure {
 
         # modified files
         [ 'OurPkgVersion' => {} ],
-        [ 'PodWeaver' => {} ],
+
+        [ 'PodWeaver' => {
+                'config_plugin' => $self->payload->{'PodWeaver.config_plugin'} || '@CHIM',
+            }
+        ],
         [ 'NextRelease' => {
                 'time_zone' => $self->payload->{'NextRelease.time_zone'} ||
                                     'UTC',
@@ -222,7 +227,10 @@ following dist.ini:
 
     ;; modified files
     [OurPkgVersion]
+
     [PodWeaver]
+    config_plugin = @CHIM
+
     [NextRelease]
     time_zone = UTC
     format    = %-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d
@@ -453,6 +461,12 @@ See more at L<Dist::Zilla::Plugin::GithubMeta>.
 Inserts a bugtracker url to metadata. Default value is C<1>.
 
 See more at L<Dist::Zilla::Plugin::GithubMeta>.
+
+=head2 PodWeaver.config_plugin
+
+Configuration of L<Pod::Weaver>. This option may appear multiple times. Default value is C<@CHIM>.
+
+See more at L<Dist::Zilla::Plugin::PodWeaver> and L<Pod::Weaver::PluginBundle::CHIM>.
 
 =head1 METHODS
 

@@ -21,7 +21,10 @@ following dist.ini:
 
     ;; modified files
     [OurPkgVersion]
+
     [PodWeaver]
+    config_plugin = @CHIM
+
     [NextRelease]
     time_zone = UTC
     format    = %-7v %{EEE MMM d HH:mm:ss yyyy ZZZ}d
@@ -261,6 +264,12 @@ Inserts a bugtracker url to metadata. Default value is `1`.
 
 See more at [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta).
 
+## PodWeaver.config\_plugin
+
+Configuration of [Pod::Weaver](https://metacpan.org/pod/Pod::Weaver). This option may appear multiple times. Default value is `@CHIM`.
+
+See more at [Dist::Zilla::Plugin::PodWeaver](https://metacpan.org/pod/Dist::Zilla::Plugin::PodWeaver) and [Pod::Weaver::PluginBundle::CHIM](https://metacpan.org/pod/Pod::Weaver::PluginBundle::CHIM).
+
 # METHODS
 
 ## configure
@@ -300,6 +309,15 @@ The distribution won't actually uploaded to the CPAN if option or variable will 
 [Dist::Zilla::Plugin::TravisCI::StatusBadge](https://metacpan.org/pod/Dist::Zilla::Plugin::TravisCI::StatusBadge)
 
 [Dist::Zilla::Plugin::GithubMeta](https://metacpan.org/pod/Dist::Zilla::Plugin::GithubMeta)
+
+# BUGS
+
+Please report any bugs or feature requests on the bugtracker website
+https://github.com/Wu-Wu/Dist-Zilla-PluginBundle-Author-CHIM/issues
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 # AUTHOR
 
