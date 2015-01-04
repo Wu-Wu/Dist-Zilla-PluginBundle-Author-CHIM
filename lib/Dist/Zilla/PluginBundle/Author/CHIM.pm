@@ -22,6 +22,13 @@ has dist => (
     default  => sub { $_[0]->payload->{dist} },
 );
 
+has no_git => (
+    is      => 'ro',
+    isa     => 'Bool',
+    lazy    => 1,
+    default  => sub { $_[0]->payload->{no_git} || 0 },
+);
+
 =for Pod::Coverage mvp_multivalue_args
 
 =cut
@@ -84,12 +91,16 @@ sub configure {
 
     $self->add_plugins(
         # version provider
-        [ 'Git::NextVersion' => {
-                ':version'       => '2.023',
-                'version_regexp' => $self->payload->{'GitNextVersion.version_regexp'} ||
-                                    '^([\d._]+)(-TRIAL)?$'
-            }
-        ],
+        (
+            $self->no_git
+            ? ()
+            : [ 'Git::NextVersion' => {
+                    ':version'       => '2.023',
+                    'version_regexp' => $self->payload->{'GitNextVersion.version_regexp'} ||
+                                        '^([\d._]+)(-TRIAL)?$'
+                }
+            ]
+        ),
         [ 'GatherDir' => $gather_dir__options ],
         [ 'PruneCruft' => {} ],
 
@@ -171,30 +182,40 @@ sub configure {
         # run tests at xt/ on dzil test
         [ 'RunExtraTests' => { default_jobs => 7 } ],
 
-        [ 'Git::Check' => {
-                'allow_dirty' => $self->payload->{'GitCheck.allow_dirty'} ||
-                                    [qw( dist.ini Changes )],
-                'untracked_files' => $self->payload->{'GitCheck.untracked_files'} ||
-                                    'die',
-            }
-        ],
+        (
+            $self->no_git
+            ? ()
+            : [ 'Git::Check' => {
+                    'allow_dirty' => $self->payload->{'GitCheck.allow_dirty'} ||
+                                        [qw( dist.ini Changes )],
+                    'untracked_files' => $self->payload->{'GitCheck.untracked_files'} ||
+                                        'die',
+                }
+            ]
+        ),
 
         # release
         [ 'ConfirmRelease' => {} ],
         [ ( $ENV{FAKE} || $self->payload->{'fake_release'} ? 'FakeRelease' : 'UploadToCPAN' ) => {} ],
 
-        [ 'Git::Commit' => {
-                'commit_msg' => $self->payload->{'GitCommit.commit_msg'} ||
-                                    'bump Changes v%v%t [ci skip]',
-            }
-        ],
-        [ 'Git::Tag' => {
-                'tag_format' => $self->payload->{'GitTag.tag_format'} ||
-                                    '%v%t',
-                'tag_message' => $self->payload->{'GitTag.tag_message'} ||
-                                    'release v%v%t',
-            }
-        ],
+        (
+            $self->no_git
+            ? ()
+            : (
+                [ 'Git::Commit' => {
+                        'commit_msg' => $self->payload->{'GitCommit.commit_msg'} ||
+                                            'bump Changes v%v%t [ci skip]',
+                    }
+                ],
+                [ 'Git::Tag' => {
+                        'tag_format' => $self->payload->{'GitTag.tag_format'} ||
+                                            '%v%t',
+                        'tag_message' => $self->payload->{'GitTag.tag_message'} ||
+                                            'release v%v%t',
+                    }
+                ]
+            )
+        ),
     );
 }
 
@@ -331,6 +352,10 @@ Removes a plugin. Might be used multiple times.
 =head2 dist
 
 The name of the distribution. Required.
+
+=head2 no_git
+
+Boolean. When C<true> - all git-related plugins will be skipped. Default value is C<false>.
 
 =head2 authority
 

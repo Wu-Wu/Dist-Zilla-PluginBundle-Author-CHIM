@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::CHIM - Dist::Zilla configuration the way CHIM
 
 # VERSION
 
-version 0.052003
+version 0.052004
 
 # DESCRIPTION
 
@@ -131,6 +131,10 @@ Removes a plugin. Might be used multiple times.
 ## dist
 
 The name of the distribution. Required.
+
+## no\_git
+
+Boolean. When `true` - all git-related plugins will be skipped. Default value is `false`.
 
 ## authority
 
